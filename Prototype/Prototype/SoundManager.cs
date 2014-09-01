@@ -19,6 +19,7 @@ namespace Prototype
         private static int explosionCount = 4;
         private static SoundEffect playerShot;
         private static SoundEffect enemyShot;
+        private static SoundEffect enemy3Shot;
 
         private static Random rand = new Random();
 
@@ -28,6 +29,8 @@ namespace Prototype
             {
                 playerShot = content.Load<SoundEffect>(@"Sounds\\Shot1");
                 enemyShot = content.Load<SoundEffect>(@"Sounds\\Shot2");
+
+                enemy3Shot = content.Load<SoundEffect>(@"Sounds\\Explosion1");
 
                 for (int x = 1; x <= explosionCount; x++)
                 {
@@ -66,6 +69,17 @@ namespace Prototype
             try
             {
                 enemyShot.Play();
+            }
+            catch
+            {
+                Debug.Write("PlayEnemyShot Failed");
+            }
+        }
+        public static void Enemy3Shot()
+        {
+            try
+            {
+                enemy3Shot.Play();
             }
             catch
             {

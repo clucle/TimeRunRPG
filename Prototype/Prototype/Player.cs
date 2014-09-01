@@ -92,7 +92,7 @@ namespace Prototype
 
                         if (Keyboard.GetState().IsKeyDown(Keys.Up))//키코드
                         {
-                            if (i_direction == 4)
+                            if (i_direction == 4 && y > 2)
                             {
                                 d_moving = 0;
                                 c_moving = 1;
@@ -105,7 +105,7 @@ namespace Prototype
                         }
                         if (Keyboard.GetState().IsKeyDown(Keys.Down))//키코드
                         {
-                            if (i_direction == 1)
+                            if (i_direction == 1 && y < 26)
                             {
                                 d_moving = 0;
                                 c_moving = 1;
@@ -118,7 +118,7 @@ namespace Prototype
                         }
                         if (Keyboard.GetState().IsKeyDown(Keys.Right))//키코드
                         {
-                            if (i_direction == 3)
+                            if (i_direction == 3 && x < 36)
                             {
                                 d_moving = 0;
                                 c_moving = 1;
@@ -131,7 +131,7 @@ namespace Prototype
                         }
                         if (Keyboard.GetState().IsKeyDown(Keys.Left))//키코드
                         {
-                            if (i_direction == 2)
+                            if (i_direction == 2 && x > 2)
                             {
                                 d_moving = 0;
                                 c_moving = 1;

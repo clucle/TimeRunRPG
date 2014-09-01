@@ -321,14 +321,14 @@ namespace Prototype
                 {
                     if (Player.x >= 18 && Player.x <= 22)
                     {
-                        if (Player.y == 28)
+                        if (Player.y == 26)
                         {
                             Player.Initialize(Content);
                             Enemy2.Initialize(Content);
                             CurrentStage++;
                         }
                     }
-                    spriteBatch.Draw(portal, new Vector2(350, 500), new Rectangle(0, 0, 100, 100), Color.White);
+                    spriteBatch.Draw(portal, new Vector2(350, 460), new Rectangle(0, 0, 100, 100), Color.White);
                 }
             }
             else if (CurrentStage == 2)
@@ -355,7 +355,7 @@ namespace Prototype
                         if (Enemy2.Tan[k].on == 1)
                         {
                             spriteBatch.Draw(Enemy_2_1_tan, new Vector2((Enemy2.Tan[k].x * 20) + 8, (Enemy2.Tan[k].y * 20) - 12), new Rectangle(0, 0, 40, 40), Color.White);
-                            int check = Player.My_hit(Player.x, Player.y, Enemy2.Tan[k].x, Enemy2.Tan[k].y, 3, Enemy2.Tan[k].i_direction);
+                            int check = Player.My_hit(Player.x, Player.y, Enemy2.Tan[k].x, Enemy2.Tan[k].y, 11, Enemy2.Tan[k].i_direction);
                             if (check == 1) Enemy2.Tan[k].on = 0;
                         }
                     }
@@ -364,14 +364,14 @@ namespace Prototype
                 {
                     if (Player.x >= 18 && Player.x <= 22)
                     {
-                        if (Player.y == 28)
+                        if (Player.y == 26)
                         {
                             Player.Initialize(Content);
                             Enemy3.Initialize(Content);
                             CurrentStage++;
                         }
                     }
-                    spriteBatch.Draw(portal, new Vector2(350, 500), new Rectangle(0, 0, 100, 100), Color.White);
+                    spriteBatch.Draw(portal, new Vector2(350, 46), new Rectangle(0, 0, 100, 100), Color.White);
                 }
             }
             else if (CurrentStage == 3)

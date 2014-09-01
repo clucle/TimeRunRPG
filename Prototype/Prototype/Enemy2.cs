@@ -59,7 +59,7 @@ namespace Prototype
             c_moving = 0;
             on = 1;
             moving = 0;
-            Max_moving = 10;
+            Max_moving = 15;
             target_on = 0;
             life = 1;
             x = 34;
@@ -67,8 +67,8 @@ namespace Prototype
             Hit_x = 2;
             Hit_y = 2;
 
-            HP_num = 1;
-            HP_max = 100;
+            HP_num = 60;
+            HP_max = 60;
         }
         #endregion
 
@@ -79,9 +79,11 @@ namespace Prototype
             {
                 if (HP_num > 0)
                 {
+                    
                     if (moving <= Max_moving) moving++;
                     if (moving >= Max_moving)
                     {
+                        pattern++;
                         if (c_moving == 0)
                         {
                             if (MyFunction.Cnct(x, y, Player.x, Player.y) == 1)
@@ -169,8 +171,8 @@ namespace Prototype
                                     y--;
                                     break;
                             }
-                            pattern++;
-                            if (pattern >= 15)
+                            
+                            if (pattern >= 10)
                             {
                                 c_moving = 4;
                                 pattern = 0;
@@ -188,7 +190,7 @@ namespace Prototype
                         }
                         else if (c_moving == 3)
                         {
-                            Player.HP_num -= 2;
+                            Player.HP_num -= 5;
                             c_moving = 0;
                         }
                         else if (c_moving == 4)

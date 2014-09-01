@@ -86,33 +86,37 @@ namespace Prototype
                 }
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Q) && head < 7)//키코드
-            {
-                F_Intensity(0, head);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.W) && body < 7)//키코드
-            {
-                F_Intensity(1, body);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.E) && leg < 7)//키코드
-            {
-                F_Intensity(2, leg);
-            }
 
             Rectangle mouserect = new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 1, 1);
-            Rectangle rect1 = new Rectangle(700, 500, 100, 100);
-
+            Rectangle rect1 = new Rectangle(482, 336, 86, 35);
+            Rectangle rect2 = new Rectangle(482, 391, 86, 35);
+            Rectangle rect3 = new Rectangle(482, 451, 86, 35);
+            Rectangle rect4 = new Rectangle(700, 550, 100, 50);
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)//마우스클릭
             {
                 mousedown++;
                 if (mousedown > 200)
                     mousedown = 200;
             }
-            if (Mouse.GetState().LeftButton == ButtonState.Released && mousedown > 0 && mouserect.Intersects(rect1))
+            if (Mouse.GetState().LeftButton == ButtonState.Released && mousedown > 0 && mouserect.Intersects(rect1) && head < 7)
+            {
+                F_Intensity(0, head);
+            }
+            if (Mouse.GetState().LeftButton == ButtonState.Released && mousedown > 0 && mouserect.Intersects(rect2) && body < 7)
+            {
+                F_Intensity(1, body);
+            }
+            if (Mouse.GetState().LeftButton == ButtonState.Released && mousedown > 0 && mouserect.Intersects(rect3) && leg < 7)
+            {
+                F_Intensity(2, leg);
+            }
+            if (Mouse.GetState().LeftButton == ButtonState.Released && mousedown > 0 && mouserect.Intersects(rect4))
             {
                 Game1.CurrentStage = 99;
                 Player_Info.Accept_Info();
             }
+
+
             if (Mouse.GetState().LeftButton == ButtonState.Released && mousedown > 0)
             {
                 mousedown = 0;

@@ -6,6 +6,9 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
+using System.Diagnostics;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 namespace Prototype
 {
     class Enemy3
@@ -61,8 +64,8 @@ namespace Prototype
             y = 15;
             Hit_x = 2;
             Hit_y = 2;
-            HP_num = 200;
-            HP_max = 200;
+            HP_num = 80;
+            HP_max = 80;
 
             pattern1 = 0;
             pattern1_max = 8;
@@ -97,7 +100,8 @@ namespace Prototype
                             Tan[pattern1_tannum].y = y;
                             Tan[pattern1_tannum].on = 1;
                             pattern1_tannum++;
-
+                            //SoundManager.PlayExplosion();
+                            SoundManager.Enemy3Shot();
                             if (pattern1_tannum == 5) pattern1_tannum = 0;
                         }
                         for (int k = 0; k < 5; k++)
@@ -113,6 +117,7 @@ namespace Prototype
                                 }
                             }
                         }
+                        
                         
 
                         if (c_moving == 0)
@@ -232,12 +237,12 @@ namespace Prototype
                     }
                     if (condition == 1)
                     {
-                        if (HP_num <= 100)
+                        if (HP_num <= 40)
                         {
                             condition = 2;
                             pattern1_max = 6;
                             Max_moving = 8;
-                            HP_num = 150;
+                            HP_num = 45;
                         }
                     }
                     return 1;
