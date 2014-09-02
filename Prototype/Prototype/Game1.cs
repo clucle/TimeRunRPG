@@ -135,8 +135,8 @@ namespace Prototype
             SoundManager.Initialize(Content);
             Enemy1.Initialize(Content);
             //Enemy2.Initialize(Content);
-            
-            
+
+            SoundManager.PlayStart();
             // TODO: 여기서 this.Content를 이용해서 사용자 콘텐츠를 로드
         }
 
