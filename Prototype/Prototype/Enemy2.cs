@@ -38,6 +38,13 @@ namespace Prototype
         {0,1,1}
         };
 
+        public struct Info_Skill
+        {
+            public int on;
+            public int num;
+            public int max;
+        }
+        public static Info_Skill Skill_CoolDown = new Info_Skill();
 
         public struct Info_tan
         {
@@ -69,6 +76,10 @@ namespace Prototype
 
             HP_num = 60;
             HP_max = 60;
+
+            Skill_CoolDown.on = 0;
+            Skill_CoolDown.max = 8;
+            Skill_CoolDown.num = 0;
         }
         #endregion
 
@@ -84,6 +95,7 @@ namespace Prototype
                     if (moving >= Max_moving)
                     {
                         pattern++;
+                        Skill_CoolDown.num++;
                         if (c_moving == 0)
                         {
                             if (MyFunction.Cnct(x, y, Player.x, Player.y) == 1)
@@ -171,10 +183,11 @@ namespace Prototype
                                     y--;
                                     break;
                             }
-                            
-                            if (pattern >= 10)
+
+                            if (pattern >= Skill_CoolDown.max)
                             {
                                 c_moving = 4;
+                                Skill_CoolDown.num=0;
                                 pattern = 0;
                             }
                             else

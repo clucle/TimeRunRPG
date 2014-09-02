@@ -41,6 +41,8 @@ namespace Prototype
 
             Texture2D Enemy_2_1;
             Texture2D Enemy_2_1_tan;
+            Texture2D Skill_Enemy_2_1;
+
 
             Texture2D Enemy_3_1;
             Texture2D Enemy_3_1_tan;
@@ -107,6 +109,8 @@ namespace Prototype
 
             Enemy_2_1 = Content.Load<Texture2D>(@"Image\\Enemy_2_1");
             Enemy_2_1_tan = Content.Load<Texture2D>(@"Image\\Enemy_2_1_tan");
+            Skill_Enemy_2_1 = Content.Load<Texture2D>(@"Image\\Skill1_Enemy_2_1");
+
 
             Enemy_3_1 = Content.Load<Texture2D>(@"Image\\Enemy_3_1");
             Enemy_3_1_tan = Content.Load<Texture2D>(@"Image\\Enemy_3_1_tan");
@@ -213,9 +217,9 @@ namespace Prototype
                 spriteBatch.Draw(Back_start, new Vector2(0, 0), new Rectangle(0, 0, 800, 600), Color.White);
             }else if(CurrentStage == 100){
                 spriteBatch.Draw(Back_intensity, new Vector2(0, 0), new Rectangle(0, 0, 800, 600), Color.White);
-                for (int i = 0; i < 5; i++)
+                for (int i = 0; i < 3; i++)//0,1,2가 강화
                 {
-                    spriteBatch.Draw(number, new Vector2(0, 50 + (i * 20)), new Rectangle(Intensity.Initialize_load[i] * 20, 0, 20, 50), Color.White);
+                    spriteBatch.Draw(number, new Vector2(575, 335 + (i * 50)), new Rectangle(Intensity.Initialize_load[i] * 20, 0, 20, 50), Color.White);
                 }
             }else{
 
@@ -359,6 +363,14 @@ namespace Prototype
                             if (check == 1) Enemy2.Tan[k].on = 0;
                         }
                     }
+
+                    spriteBatch.Draw(Skill_Enemy_2_1, new Vector2(700, 70), new Rectangle(0, 0, 50, 50), Color.White);
+                    //if (Enemy2.Skill_CoolDown.on == 0)
+                    //{
+                        int Cool = 50 * Enemy2.Skill_CoolDown.num / Enemy2.Skill_CoolDown.max;
+                        spriteBatch.Draw(Skill_cooldown, new Vector2(700, 70), new Rectangle(0, 0, 50, 50 - Cool), Color.White);
+                    //}
+
                 }
                 else
                 {
@@ -371,7 +383,7 @@ namespace Prototype
                             CurrentStage++;
                         }
                     }
-                    spriteBatch.Draw(portal, new Vector2(350, 46), new Rectangle(0, 0, 100, 100), Color.White);
+                    spriteBatch.Draw(portal, new Vector2(350, 460), new Rectangle(0, 0, 100, 100), Color.White);
                 }
             }
             else if (CurrentStage == 3)

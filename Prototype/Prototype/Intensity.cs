@@ -88,10 +88,10 @@ namespace Prototype
 
 
             Rectangle mouserect = new Rectangle(Mouse.GetState().X, Mouse.GetState().Y, 1, 1);
-            Rectangle rect1 = new Rectangle(482, 336, 86, 35);
-            Rectangle rect2 = new Rectangle(482, 391, 86, 35);
-            Rectangle rect3 = new Rectangle(482, 451, 86, 35);
-            Rectangle rect4 = new Rectangle(700, 550, 100, 50);
+            Rectangle rect1 = new Rectangle(615, 340, 63, 38);
+            Rectangle rect2 = new Rectangle(615, 395, 63, 38);
+            Rectangle rect3 = new Rectangle(615, 450, 63, 38);
+            Rectangle rect4 = new Rectangle(607, 525, 71, 38);
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)//마우스클릭
             {
                 mousedown++;
