@@ -7,15 +7,13 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
-
+ 
 namespace Prototype
 {
     class Start
     {
         #region Declarations
-
         static byte mousedown;
-
         #endregion
 
         #region update
@@ -52,9 +50,6 @@ namespace Prototype
             {
                 mousedown = 0;
             }
-            //Intensity.Update(gameTime);
-
-
         }
         #endregion
     }

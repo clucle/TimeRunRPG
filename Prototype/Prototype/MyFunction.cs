@@ -17,10 +17,5 @@ namespace Prototype
             }
             return 0;
         }
-        static void My_hit(int x1, int y1, int x2, int y2, int attack)//적의 공격)
-        {
-            //x랑 y 범위 attack만큼 공격 받음
-        }
-
     }
 }

@@ -11,13 +11,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 
-
 namespace Prototype
 {
-    /// <summary>
-    /// 이것은 사용자 게임의 주 형식입니다.
-    /// </summary>
-    /// 
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         #region Declarations
@@ -43,9 +38,10 @@ namespace Prototype
             Texture2D Enemy_2_1_tan;
             Texture2D Skill_Enemy_2_1;
 
-
             Texture2D Enemy_3_1;
             Texture2D Enemy_3_1_tan;
+
+            Texture2D Enemy_4_1;
 
             Texture2D Skill_backshot;
             Texture2D Skill_cooldown;
@@ -68,17 +64,13 @@ namespace Prototype
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferWidth = 800; //화면 크기 조정
             graphics.PreferredBackBufferHeight = 600;
-
             CurrentStage = 99;
-            //CurrentStage = 3;
         }
         #endregion
 
         #region Initialization
         protected override void Initialize()
         {
-            // TODO: 여기에 사용자의 초기화 논리 추가
-
             base.Initialize();
         }
         #endregion
@@ -86,15 +78,7 @@ namespace Prototype
         #region Load
         protected override void LoadContent()
         {
-
-
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-
-
-            // 텍스쳐를 출력하는 데 사용할 수 있는 새 SpriteBatch를 생성하십시오.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-
 
             Back_start = Content.Load<Texture2D>(@"Image\\Back_start");
 
@@ -115,6 +99,8 @@ namespace Prototype
             Enemy_3_1 = Content.Load<Texture2D>(@"Image\\Enemy_3_1");
             Enemy_3_1_tan = Content.Load<Texture2D>(@"Image\\Enemy_3_1_tan");
 
+            Enemy_4_1 = Content.Load<Texture2D>(@"Image\\Enemy_4_1");
+
             Skill_backshot = Content.Load<Texture2D>(@"Image\\Skill_backshot");
             Skill_cooldown = Content.Load<Texture2D>(@"Image\\Skill_cooldown");
             Skill_moving = Content.Load<Texture2D>(@"Image\\Skill_moving");
@@ -134,19 +120,13 @@ namespace Prototype
             Intensity.Initialize(Content);
             SoundManager.Initialize(Content);
             Enemy1.Initialize(Content);
-            //Enemy2.Initialize(Content);
 
             SoundManager.PlayStart();
-            // TODO: 여기서 this.Content를 이용해서 사용자 콘텐츠를 로드
         }
 
-        /// <summary>
-        /// UnloadContent는 매 게임별로 한 번씩 호출되며 이 메서드에서
-        /// 모든 사용자 콘텐츠를 언로드합니다.
-        /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: 여기서 모든 비ContentManager 콘텐츠를 언로드
+
         }
         #endregion
 
@@ -196,22 +176,10 @@ namespace Prototype
         #endregion
 
         #region Draw
-        /// <summary>
-        /// 게임이 스스로 갱신해야 할 때 이 메서드를 호출합니다.
-        /// </summary>
-        /// <param name="gameTime">타이밍 값의 스냅샷을 제공합니다.</param>
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            
-            // TODO: 여기에 그래픽 출력 코드를 추가하십시오.
             spriteBatch.Begin();
-            //Player.Draw(gameTime);
-
-
-            
-
             if (CurrentStage == 99)
             {
                 spriteBatch.Draw(Back_start, new Vector2(0, 0), new Rectangle(0, 0, 800, 600), Color.White);
@@ -222,10 +190,7 @@ namespace Prototype
                     spriteBatch.Draw(number, new Vector2(575, 335 + (i * 50)), new Rectangle(Intensity.Initialize_load[i] * 20, 0, 20, 50), Color.White);
                 }
             }else{
-
                 spriteBatch.Draw(Tile, new Vector2(0, 0), new Rectangle(0, 0, 800, 600), Color.White);
-
-                //spriteBatch.Draw(Map1, new Vector2(0, 0), new Rectangle(0, 0, 800, 600), Color.White);
                 for (int k = 0; k <= 20; k++)
                 {
                     for (int j = 0; j <= 20; j++)
@@ -256,10 +221,6 @@ namespace Prototype
                 }
 
             }
-
-
-
-
             if (CurrentStage <= 50)
             {
                 spriteBatch.Draw(HP_out, new Vector2(450, 20), new Rectangle(0, 0, 300, 30), Color.White);
@@ -271,7 +232,6 @@ namespace Prototype
                     }
                 }
             }
-
 
             #region Enemy
             //1탄
@@ -365,11 +325,8 @@ namespace Prototype
                     }
 
                     spriteBatch.Draw(Skill_Enemy_2_1, new Vector2(700, 70), new Rectangle(0, 0, 50, 50), Color.White);
-                    //if (Enemy2.Skill_CoolDown.on == 0)
-                    //{
-                        int Cool = 50 * Enemy2.Skill_CoolDown.num / Enemy2.Skill_CoolDown.max;
-                        spriteBatch.Draw(Skill_cooldown, new Vector2(700, 70), new Rectangle(0, 0, 50, 50 - Cool), Color.White);
-                    //}
+                    int Cool = 50 * Enemy2.Skill_CoolDown.num / Enemy2.Skill_CoolDown.max;
+                    spriteBatch.Draw(Skill_cooldown, new Vector2(700, 70), new Rectangle(0, 0, 50, 50 - Cool), Color.White);
 
                 }
                 else
@@ -434,12 +391,9 @@ namespace Prototype
                 }
 
             }
-
             spriteBatch.Draw(Mousepoint, new Vector2(Mouse.GetState().X, Mouse.GetState().Y), new Rectangle(0, 0, 50, 50), Color.White);
             #endregion
             spriteBatch.End();
-
-
             base.Draw(gameTime);
         }
             

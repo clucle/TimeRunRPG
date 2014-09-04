@@ -137,22 +137,22 @@ namespace Prototype
                     Supercent = 100;
                     break;
                 case 1:
-                    Supercent = 80;
+                    Supercent = 90;
                     break;
                 case 2:
-                    Supercent = 60;
+                    Supercent = 80;
                     break;
                 case 3:
-                    Supercent = 50;
+                    Supercent = 75;
                     break;
                 case 4:
-                    Supercent = 40;
+                    Supercent = 65;
                     break;
                 case 5:
-                    Supercent = 30;
+                    Supercent = 60;
                     break;
                 case 6:
-                    Supercent = 20;
+                    Supercent = 50;
                     break;
             }
             if (Mypercent <= Supercent)//성공
@@ -161,7 +161,7 @@ namespace Prototype
             }
             else
             {
-                if (Intensity > 4)
+                if (Intensity > 1)
                 {
                     Initialize_load[item_num]--;
                 }

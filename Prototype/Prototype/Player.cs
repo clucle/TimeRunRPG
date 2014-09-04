@@ -176,7 +176,7 @@ namespace Prototype
                                 d_gun = 0;
                                 skill_moving_num = 0;
                                 i_mode = 3;
-                                Cooldown.Skill_CoolDown[0].on = 0;
+                                
                             }
                         }
                         if (Keyboard.GetState().IsKeyDown(Keys.W))//빽샷
@@ -201,16 +201,16 @@ namespace Prototype
                         switch (i_direction)
                         {
                             case 1:
-                                y++;
+                                if(y < 26) y++;
                                 break;
                             case 2:
-                                x--;
+                                if (x > 2) x--;
                                 break;
                             case 3:
-                                x++;
+                                if (x < 36) x++;
                                 break;
                             case 4:
-                                y--;
+                                if (y > 2)  y--;
                                 break;
                         }
                         c_moving = 2;
@@ -220,16 +220,16 @@ namespace Prototype
                         switch (i_direction)
                         {
                             case 1:
-                                y++;
+                                if (y < 26) y++;
                                 break;
                             case 2:
-                                x--;
+                                if (x > 2) x--;
                                 break;
                             case 3:
-                                x++;
+                                if (x < 36)  x++;
                                 break;
                             case 4:
-                                y--;
+                                if (y > 2)  y--;
                                 break;
                         }
                         c_moving = 0;
@@ -262,17 +262,16 @@ namespace Prototype
                         switch (i_direction)
                         {
                             case 1:
-
-                                y--;
+                                if(y > 2) y--;
                                 break;
                             case 2:
-                                x++;
+                                if(x < 36) x++;
                                 break;
                             case 3:
-                                x--;
+                                if(x > 2) x--;
                                 break;
                             case 4:
-                                y++;
+                                if(y < 26) y++;
                                 break;
                         }
 
@@ -368,16 +367,16 @@ namespace Prototype
                             switch (skill_moving_direction)
                             {
                                 case 1:
-                                    y++;
+                                    if (y < 26) y++;
                                     break;
                                 case 2:
-                                    x--;
+                                    if (x > 2) x--;
                                     break;
                                 case 3:
-                                    x++;
+                                    if (x < 36) x++;
                                     break;
                                 case 4:
-                                    y--;
+                                    if (y > 2) y--;
                                     break;
                             }
 
@@ -389,16 +388,16 @@ namespace Prototype
                             switch (skill_moving_direction)
                             {
                                 case 1:
-                                    y++;
+                                    if (y < 26) y++;
                                     break;
                                 case 2:
-                                    x--;
+                                    if (x > 2) x--;
                                     break;
                                 case 3:
-                                    x++;
+                                    if (x < 36) x++;
                                     break;
                                 case 4:
-                                    y--;
+                                    if (y > 2) y--;
                                     break;
                             }
                             s_moving = 0;
@@ -416,6 +415,7 @@ namespace Prototype
                             d_moving = 0;
                             d_gun = 0;
                             skill_moving_num = 0;
+                            Cooldown.Skill_CoolDown[0].on = 0;
                         }
                     }
                 }//imode
@@ -484,22 +484,6 @@ namespace Prototype
             {
                 if (x1 <= x2 + w && y1 <= y2 + h)
                 {
-                    //switch (direction)
-                    //{
-                    //    case 1:
-                    //        y += 2;
-                    //        break;
-                    //    case 2:
-                    //        x -= 2;
-                    //        break;
-                    //    case 3:
-                    //        x += 2;
-                    //        break;
-                    //   case 4:
-                    //        y -= 2;
-                    //        break;
-                    //}
-                    //return 1;
                     HP_num -= attack;
                     return 1;
                 }

@@ -2,19 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
-
-
 
 namespace Prototype
 {
 
     public static class SoundManager
     {
+
         private static SoundEffect Start_Bgm;
         private static SoundEffectInstance Start_Bgm_Instance;
 
@@ -64,7 +62,7 @@ namespace Prototype
         {
             try
             {
-                Start_Bgm_Instance.Play();
+                //Start_Bgm_Instance.Play();
             }
             catch
             {
@@ -75,7 +73,7 @@ namespace Prototype
         {
             try
             {
-                Start_Bgm_Instance.Stop();
+                //Start_Bgm_Instance.Stop();
             }
             catch
             {
@@ -86,7 +84,7 @@ namespace Prototype
         {
             try
             {
-                Stage1_3_Bgm_Instance.Play();
+                //Stage1_3_Bgm_Instance.Play();
             }
             catch
             {
@@ -97,7 +95,7 @@ namespace Prototype
         {
             try
             {
-                Stage1_3_Bgm_Instance.Stop();
+                //Stage1_3_Bgm_Instance.Stop();
             }
             catch
             {
@@ -108,7 +106,7 @@ namespace Prototype
         {
             try
             {
-                explosions[rand.Next(0, explosionCount)].Play();
+                //explosions[rand.Next(0, explosionCount)].Play();
             }
             catch
             {
@@ -119,7 +117,7 @@ namespace Prototype
         {
             try
             {
-                playerShot.Play();
+                //playerShot.Play();
             }
             catch
             {
@@ -130,7 +128,7 @@ namespace Prototype
         {
             try
             {
-                enemyShot.Play();
+                //enemyShot.Play();
             }
             catch
             {
@@ -141,7 +139,7 @@ namespace Prototype
         {
             try
             {
-                enemy3Shot.Play();
+                //enemy3Shot.Play();
             }
             catch
             {
