@@ -31,6 +31,11 @@ namespace Prototype
             Texture2D character1;
             Texture2D location; 
             Texture2D tan;
+
+
+
+            Texture2D Enemy_tile;
+
             Texture2D Enemy_1_1;
             Texture2D Effect_1_1;
 
@@ -42,6 +47,8 @@ namespace Prototype
             Texture2D Enemy_3_1_tan;
 
             Texture2D Enemy_4_1;
+            Texture2D Effect_4_1;
+
 
             Texture2D Skill_backshot;
             Texture2D Skill_cooldown;
@@ -88,6 +95,9 @@ namespace Prototype
             character1 = Content.Load<Texture2D>(@"Image\\character1");
             location = Content.Load<Texture2D>(@"Image\\location");
             tan = Content.Load<Texture2D>(@"Image\\tan");
+
+            Enemy_tile = Content.Load<Texture2D>(@"Image\\Enemy_tile");
+
             Enemy_1_1 = Content.Load<Texture2D>(@"Image\\Enemy_1_1");
             Effect_1_1 = Content.Load<Texture2D>(@"Image\\Effect_1_1");
 
@@ -100,6 +110,7 @@ namespace Prototype
             Enemy_3_1_tan = Content.Load<Texture2D>(@"Image\\Enemy_3_1_tan");
 
             Enemy_4_1 = Content.Load<Texture2D>(@"Image\\Enemy_4_1");
+            Effect_4_1 = Content.Load<Texture2D>(@"Image\\Effect_4_1");
 
             Skill_backshot = Content.Load<Texture2D>(@"Image\\Skill_backshot");
             Skill_cooldown = Content.Load<Texture2D>(@"Image\\Skill_cooldown");
@@ -131,19 +142,10 @@ namespace Prototype
         #endregion
 
         #region Update
-        /// <summary>
-        /// 게임이 레벨 업데이트, 충돌 감지, 입력 감지 및 오디오 재생과
-        /// 같은 게임 논리 코드를 실행할 수 있습니다.
-        /// </summary>
-        /// <param name="gameTime">타이밍 값의 스냅샷을 제공합니다.</param>
         protected override void Update(GameTime gameTime)
         {
-            // 게임이 종료할 수 있게 함
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
-            // TODO: 여기에 업데이트 논리 추가
-
             if (CurrentStage <= 50)
             {
                 Player.Update(gameTime);
@@ -159,6 +161,9 @@ namespace Prototype
                     break;
                 case 3:
                     Enemy3.Update(gameTime);
+                    break;
+                case 4:
+                    Enemy4.Update(gameTime);
                     break;
                 case 99:
                     Start.Update(gameTime);
@@ -288,8 +293,13 @@ namespace Prototype
                         if (Player.y == 26)
                         {
                             Player.Initialize(Content);
-                            Enemy2.Initialize(Content);
-                            CurrentStage++;
+                            //Enemy2.Initialize(Content);
+                            //CurrentStage++;
+
+                            Enemy4.Initialize(Content);
+                            SoundManager.StopStage1_3();
+                            SoundManager.PlayStage4_6();
+                            CurrentStage = 4;
                         }
                     }
                     spriteBatch.Draw(portal, new Vector2(350, 460), new Rectangle(0, 0, 100, 100), Color.White);
@@ -380,16 +390,112 @@ namespace Prototype
                 {
                     if (Player.x >= 18 && Player.x <= 22)
                     {
-                        if (Player.y == 28)
+                        if (Player.y == 26)
                         {
                             Player.Initialize(Content);
-                            //Enemy4.Initialize(Content);
+                            Enemy4.Initialize(Content);
+                            SoundManager.StopStage1_3();
+                            SoundManager.PlayStage4_6();
                             CurrentStage++;
                         }
                     }
-                    spriteBatch.Draw(portal, new Vector2(350, 500), new Rectangle(0, 0, 100, 100), Color.White);
+                    spriteBatch.Draw(portal, new Vector2(350, 460), new Rectangle(0, 0, 100, 100), Color.White);
                 }
 
+            }else if(CurrentStage == 4){
+                if (Enemy4.life == 1)
+                {
+                    int EnemyHP = 292 * Enemy4.HP_num / Enemy4.HP_max;
+                    spriteBatch.Draw(HP_in, new Vector2(454 + 292 - EnemyHP, 24), new Rectangle(0, 0, EnemyHP, 22), Color.White);
+
+
+                    for (int k = 0; k <= 49; k++)
+                    {
+                        if (Player_Tan.c_Tan[k].on == 1)
+                        {
+                            int check = Enemy4.Enemy_hit(Player_Tan.c_Tan[k].x, Player_Tan.c_Tan[k].y, Enemy4.x, Enemy4.y, 3, Player_Tan.c_Tan[k].i_direction);
+                            if (check == 1) Player_Tan.c_Tan[k].on = 0;
+                        }
+                    }
+
+                    int revision_c_moving;
+                    if (Enemy4.c_moving > 3)
+                    {
+                        revision_c_moving = Enemy4.c_moving - 3;
+                    }
+                    else
+                    {
+                        revision_c_moving = Enemy4.c_moving;
+                    }
+
+                    spriteBatch.Draw(Enemy_tile, new Vector2((Enemy4.x * 20), (Enemy4.y * 20)), new Rectangle(0, 0, 40, 40), Color.White);
+                    if (Enemy4.target_xy == 0) spriteBatch.Draw(Enemy_tile, new Vector2((Enemy4.x * 20) + 40, (Enemy4.y * 20)), new Rectangle(0, 0, 40, 40), Color.White);
+
+                    spriteBatch.Draw(Enemy_4_1, new Vector2((Enemy4.x * 20) - (Enemy4.revision * 20), (Enemy4.y * 20) - 40), new Rectangle((revision_c_moving * 80), (Enemy4.i_direction - 1) * 80 + Enemy4.condition * 320, 80, 80), Color.White);
+
+                    //Effect
+                    if (Enemy4.condition == 1)
+                    {
+                        for (int h1 = 0; h1 <= Enemy1.Hit_y; h1++)
+                        {
+                            for (int h2 = 0; h2 <= Enemy1.Hit_x; h2++)
+                            {
+                                switch (Enemy4.patternline)
+                                {
+                                    case 1:
+                                        if (Enemy4.Hit_Matrix1[h1, h2] == 1)
+                                        {
+                                            spriteBatch.Draw(Effect_4_1, new Vector2(Enemy4.x * 20 + ((h1 - 1) * 40) - 30, Enemy4.y * 20 + ((h2 - 1) * 40) - 30), new Rectangle((Enemy4.target_on - 1) * 80, 0, 80, 80), Color.White);
+                                            int check = Player.My_hit(Player.x, Player.y, Enemy4.x + ((h2 - 1) * 2), Enemy4.y + ((h1 - 1) * 2), 1, 0);
+                                            if (check == 1) Player.y += 2;
+                                        }
+                                        break;
+                                    case 2:
+                                        if (Enemy4.Hit_Matrix2[h1, h2] == 1)
+                                        {
+                                            spriteBatch.Draw(Effect_4_1, new Vector2(Enemy4.x * 20 + ((h1 - 1) * 40) - 30, Enemy4.y * 20 + ((h2 - 1) * 40) - 30), new Rectangle((Enemy4.target_on - 1) * 80, 0, 80, 80), Color.White);
+                                            int check = Player.My_hit(Player.x, Player.y, Enemy4.x + ((h2 - 1) * 2), Enemy4.y + ((h1 - 1) * 2), 1, 0);
+                                            if (check == 1) Player.x -= 2;
+                                        }
+                                        break;
+                                    case 3:
+                                        if (Enemy4.Hit_Matrix3[h1, h2] == 1)
+                                        {
+                                            spriteBatch.Draw(Effect_4_1, new Vector2(Enemy4.x * 20 + ((h1 - 1) * 40) - 30, Enemy4.y * 20 + ((h2 - 1) * 40) - 30), new Rectangle((Enemy4.target_on - 1) * 80, 0, 80, 80), Color.White);
+                                            int check = Player.My_hit(Player.x, Player.y, Enemy4.x + ((h2 - 1) * 2), Enemy4.y + ((h1 - 1) * 2), 1, 0);
+                                            if (check == 1) Player.x += 2;
+                                        }
+                                        break;
+                                    case 4:
+                                        if (Enemy4.Hit_Matrix4[h1, h2] == 1)
+                                        {
+                                            spriteBatch.Draw(Effect_4_1, new Vector2(Enemy4.x * 20 + ((h1 - 1) * 40) - 30, Enemy4.y * 20 + ((h2 - 1) * 40) - 30), new Rectangle((Enemy4.target_on - 1) * 80, 0, 80, 80), Color.White);
+                                            int check = Player.My_hit(Player.x, Player.y, Enemy4.x + ((h2 - 1) * 2), Enemy4.y + ((h1 - 1) * 2), 1, 0);
+                                            if (check == 1) Player.y -= 2;
+                                        }
+                                        break;
+                                }
+
+                            }
+                        }
+                    }
+                    if (Enemy4.delay_Effect == 3)
+                    {
+                        if (Enemy4.target_on <= 5)
+                        {
+                            Enemy4.target_on++;
+                        }
+                        else
+                        {
+                            Enemy4.target_on = 0;
+                        }
+                        Enemy4.delay_Effect = 0;
+                    }
+                }
+                else
+                {
+
+                }
             }
             spriteBatch.Draw(Mousepoint, new Vector2(Mouse.GetState().X, Mouse.GetState().Y), new Rectangle(0, 0, 50, 50), Color.White);
             #endregion

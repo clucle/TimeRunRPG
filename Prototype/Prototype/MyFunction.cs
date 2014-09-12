@@ -17,5 +17,33 @@ namespace Prototype
             }
             return 0;
         }
+        public static int LineCrush(int x1, int y1, int x2, int y2)//충돌검사(몹과 나)
+        {
+            if (x1 == x2)
+            {
+                if (y1 > y2)
+                {
+                    return 1;
+                }
+                else if (y1 < y2)
+                {
+                    return 4;
+                }
+            }
+            if (y1 == y2)
+            {
+                if (x1 > x2)
+                {
+                    return 3;
+                }
+                else if (x1 < x2)
+                {
+                    return 2;
+                }
+            }
+
+
+            return 0;
+        }
     }
 }

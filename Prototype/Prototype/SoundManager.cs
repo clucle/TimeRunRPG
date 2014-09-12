@@ -19,6 +19,9 @@ namespace Prototype
         private static SoundEffect Stage1_3_Bgm;
         private static SoundEffectInstance Stage1_3_Bgm_Instance;
 
+        private static SoundEffect Stage4_6_Bgm;
+        private static SoundEffectInstance Stage4_6_Bgm_Instance;
+
         private static List<SoundEffect> explosions = new List<SoundEffect>();
         private static int explosionCount = 4;
         private static SoundEffect playerShot;
@@ -42,6 +45,10 @@ namespace Prototype
                 Stage1_3_Bgm_Instance = Stage1_3_Bgm.CreateInstance();
                 Stage1_3_Bgm_Instance.IsLooped = true;
 
+                Stage4_6_Bgm = content.Load<SoundEffect>(@"Sounds\\Stage4_6");
+                Stage4_6_Bgm_Instance = Stage4_6_Bgm.CreateInstance();
+                Stage4_6_Bgm_Instance.IsLooped = true;
+
                 playerShot = content.Load<SoundEffect>(@"Sounds\\Shot1");
                 enemyShot = content.Load<SoundEffect>(@"Sounds\\Shot2");
 
@@ -62,7 +69,7 @@ namespace Prototype
         {
             try
             {
-                //Start_Bgm_Instance.Play();
+                Start_Bgm_Instance.Play();
             }
             catch
             {
@@ -73,7 +80,7 @@ namespace Prototype
         {
             try
             {
-                //Start_Bgm_Instance.Stop();
+                Start_Bgm_Instance.Stop();
             }
             catch
             {
@@ -84,7 +91,7 @@ namespace Prototype
         {
             try
             {
-                //Stage1_3_Bgm_Instance.Play();
+                Stage1_3_Bgm_Instance.Play();
             }
             catch
             {
@@ -95,18 +102,40 @@ namespace Prototype
         {
             try
             {
-                //Stage1_3_Bgm_Instance.Stop();
+                Stage1_3_Bgm_Instance.Stop();
             }
             catch
             {
-                Debug.Write("PlayEnemyShot Failed");
+                Debug.Write("Play1_3 Failed");
+            }
+        }
+        public static void PlayStage4_6()
+        {
+            try
+            {
+                Stage4_6_Bgm_Instance.Play();
+            }
+            catch
+            {
+                Debug.Write("Play4_6 Failed");
+            }
+        }
+        public static void StopStage4_6()
+        {
+            try
+            {
+                Stage4_6_Bgm_Instance.Stop();
+            }
+            catch
+            {
+                Debug.Write("Play4_6 Failed");
             }
         }
         public static void PlayExplosion()
         {
             try
             {
-                //explosions[rand.Next(0, explosionCount)].Play();
+                explosions[rand.Next(0, explosionCount)].Play();
             }
             catch
             {
@@ -117,7 +146,7 @@ namespace Prototype
         {
             try
             {
-                //playerShot.Play();
+                playerShot.Play();
             }
             catch
             {
@@ -128,7 +157,7 @@ namespace Prototype
         {
             try
             {
-                //enemyShot.Play();
+                enemyShot.Play();
             }
             catch
             {
@@ -139,7 +168,7 @@ namespace Prototype
         {
             try
             {
-                //enemy3Shot.Play();
+                enemy3Shot.Play();
             }
             catch
             {
@@ -147,5 +176,4 @@ namespace Prototype
             }
         }
     }
-    
 }

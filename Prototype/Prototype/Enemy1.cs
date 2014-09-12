@@ -47,7 +47,7 @@ namespace Prototype
             y = 16;
             Hit_x = 2;
             Hit_y = 2;
-            HP_num = 20;
+            HP_num = 1;
             HP_max = 20;
         }
         #endregion

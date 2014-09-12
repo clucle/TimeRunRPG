@@ -11,8 +11,6 @@ namespace Prototype
     class Enemy2
     {
         #region Declarations
-
-        public static byte on;
         public static int x;
         public static int y;
         public static byte c_moving;
@@ -63,7 +61,6 @@ namespace Prototype
         {
             pattern = 0;
             c_moving = 0;
-            on = 1;
             moving = 0;
             Max_moving = 15;
             target_on = 0;
