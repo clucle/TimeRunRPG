@@ -27,8 +27,8 @@ namespace Prototype
         public static byte Hit_x;
         public static byte Hit_y;
 
-        static byte pattern1;
-        static byte pattern1_max;
+        public static byte pattern1;
+        public static byte pattern1_max;
         static byte pattern1_tannum;
 
         public static byte condition;
@@ -201,6 +201,7 @@ namespace Prototype
                         switch (c_moving)
                         {
                             case 0:
+                                int i = MyFunction.GetMoney(10);
                                 life = 0;
                                 break;
                         }

@@ -254,6 +254,7 @@ namespace Prototype
                         switch (c_moving)
                         {
                             case 0:
+                                int i = MyFunction.GetMoney(4);
                                 life = 0;
                                 break;
                         }

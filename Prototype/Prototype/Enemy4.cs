@@ -22,7 +22,8 @@ namespace Prototype
 
         public static int revision;
 
-        static int pattern;
+        public static int pattern;
+        public static int pattern_max;
         public static int patternline;
         public static int HP_num;
         public static int HP_max;
@@ -66,7 +67,7 @@ namespace Prototype
         {
             c_moving = 0;
             moving = 0;
-            Max_moving = 10;
+            Max_moving = 20;
             target_on = 0;
             delay_Effect = 0;
             life = 1;
@@ -76,6 +77,7 @@ namespace Prototype
             Hit_y = 2;
 
             pattern = 0;
+            pattern_max = 15;
             patternline = 0;
             revision = 0;
 
@@ -98,7 +100,7 @@ namespace Prototype
                     if (moving <= Max_moving) moving++;
                     if (moving >= Max_moving)
                     {
-                        if (pattern<=20 && patternline == 0)
+                        if (pattern <= pattern_max && patternline == 0)
                         {
                             pattern++;
                         }
@@ -198,7 +200,7 @@ namespace Prototype
                                     y--;
                                     break;
                             }
-                            if (pattern >= 2)
+                            if (pattern >= pattern_max)
                             {
                                 patternline = MyFunction.LineCrush(Player.x, Player.y,x , y);
                                 if (patternline > 0)
@@ -221,7 +223,7 @@ namespace Prototype
                             SoundManager.PlayEnemyShot();
                             c_moving++;
                             target_on = 1;
-                            Player.HP_num -= 10;
+                            Player.HP_num -= 5;
                         }
                         else if (c_moving == 3)
                         {
@@ -277,7 +279,7 @@ namespace Prototype
                             if ((x == 2 || x == 36) && (patternline == 2 || patternline == 3) || (y == 2 || y == 26) && (patternline == 1 || patternline == 4))
                             {
                                 c_moving = 0;
-                                Max_moving = 10;
+                                Max_moving = 20;
                                 moving = 0;
                                 condition = 0;
                                 pattern = 0;
@@ -307,7 +309,7 @@ namespace Prototype
                             if ((x == 2 || x == 36) && (patternline == 2 || patternline == 3) || (y == 2 || y == 26) && (patternline == 1 || patternline == 4))
                             {
                                 c_moving = 0;
-                                Max_moving = 10;
+                                Max_moving = 20;
                                 moving = 0;
                                 condition = 0;
                                 pattern = 0;
@@ -327,6 +329,7 @@ namespace Prototype
                         switch (c_moving)
                         {
                             case 0:
+                                int i = MyFunction.GetMoney(15);
                                 life = 0;
                                 break;
                         }

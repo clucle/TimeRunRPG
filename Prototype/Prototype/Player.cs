@@ -70,8 +70,8 @@ namespace Prototype
 
             tan_checking = 0;
 
-            HP_num = 30;
-            HP_max = 30;
+            HP_num = 100;
+            HP_max = 100;
 
         }
         #endregion

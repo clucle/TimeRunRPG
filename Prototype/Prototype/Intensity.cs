@@ -24,7 +24,7 @@ namespace Prototype
         public static int money;
 
         static byte mousedown;
-        public static int[] Initialize_load = new int[5];
+        public static int[] Initialize_load = new int[6];
         #endregion
         #region Initialize
         public static void Initialize(ContentManager content)
@@ -33,7 +33,7 @@ namespace Prototype
             i = 0;
             FileStream fr = new FileStream("data.txt", FileMode.OpenOrCreate, FileAccess.Read);
             StreamReader sr = new StreamReader(fr, System.Text.Encoding.Default);
-            while (!sr.EndOfStream && i < 5)
+            while (!sr.EndOfStream && i < 6)
             {
                 Initialize_load[i] = int.Parse(sr.ReadLine());
                 switch (i)
@@ -53,6 +53,9 @@ namespace Prototype
                     case 4:
                         armor = Initialize_load[i];
                         break;
+                    case 5:
+                        money = Initialize_load[i];
+                        break;
                 }
                 i++;
             }
@@ -64,7 +67,7 @@ namespace Prototype
         #region update
         public static void Update(GameTime gameTime)
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
                 switch (i)
                 {
@@ -82,6 +85,9 @@ namespace Prototype
                         break;
                     case 4:
                         armor = Initialize_load[i];
+                        break;
+                    case 5:
+                        money = Initialize_load[i];
                         break;
                 }
             }
@@ -127,50 +133,59 @@ namespace Prototype
         #region Function
         public static void F_Intensity(int item_num, int Intensity)
         {
-            Random rNum = new Random();
-            int Mypercent = rNum.Next(1, 100);
+            if (money >= Intensity * Intensity)
+            {
+                Initialize_load[5] -= (Intensity * Intensity);
+                money -= (Intensity * Intensity);
+                
+                Random rNum = new Random();
+                int Mypercent = rNum.Next(1, 100);
 
-            int Supercent = 0;//성공확률
-            switch (Intensity)
-            {
-                case 0:
-                    Supercent = 100;
-                    break;
-                case 1:
-                    Supercent = 90;
-                    break;
-                case 2:
-                    Supercent = 80;
-                    break;
-                case 3:
-                    Supercent = 75;
-                    break;
-                case 4:
-                    Supercent = 65;
-                    break;
-                case 5:
-                    Supercent = 60;
-                    break;
-                case 6:
-                    Supercent = 50;
-                    break;
-            }
-            if (Mypercent <= Supercent)//성공
-            {
-                Initialize_load[item_num]++;
-            }
-            else
-            {
-                if (Intensity > 1)
+                int Supercent = 0;//성공확률
+                switch (Intensity)
                 {
-                    Initialize_load[item_num]--;
+                    case 0:
+                        Supercent = 100;
+                        break;
+                    case 1:
+                        Supercent = 80;
+                        break;
+                    case 2:
+                        Supercent = 60;
+                        break;
+                    case 3:
+                        Supercent = 50;
+                        break;
+                    case 4:
+                        Supercent = 40;
+                        break;
+                    case 5:
+                        Supercent = 30;
+                        break;
+                    case 6:
+                        Supercent = 20;
+                        break;
                 }
+                if (Mypercent <= Supercent)//성공
+                {
+                    Initialize_load[item_num]++;
+                }
+                else
+                {
+                    if (Intensity > 1)
+                    {
+                        //Initialize_load[item_num]--;
+                    }
+                }
+                Save_data();
             }
-
+        }
+        public static void Save_data()
+        {
             int i = 0;
             FileStream fw = new FileStream("data.txt", FileMode.Create);
             StreamWriter sw = new StreamWriter(fw, System.Text.Encoding.UTF8);
-            for (i = 0; i < 5; i++)
+            for (i = 0; i < 6; i++)
             {
                 sw.WriteLine(Initialize_load[i]);
             }

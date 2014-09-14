@@ -35,6 +35,7 @@ namespace Prototype
             {
                 SoundManager.StopStart();
                 SoundManager.PlayStage1_3();
+
                 Game1.CurrentStage = 1;
                 Player_Info.Accept_Info();
             }

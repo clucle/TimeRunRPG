@@ -41,9 +41,36 @@ namespace Prototype
                     return 2;
                 }
             }
-
-
             return 0;
+        }
+        public static int GetMoney(int x1)
+        {
+
+            Random rNum = new Random();
+            int Mypercent = rNum.Next(1, 100);
+            if (Mypercent <= 2)//성공 *77
+            {
+                Intensity.Initialize_load[5] += (x1 * 77);
+                Intensity.money += (x1 * 77);
+                Intensity.Save_data();
+                return 2;
+            }
+            else if (Mypercent <= 7)//성공 * 7
+            {
+                Intensity.Initialize_load[5] += (x1 * 7);
+                Intensity.money += (x1 * 7);
+                Intensity.Save_data();
+                return 1;
+            }
+            else
+            {
+                Intensity.Initialize_load[5] += x1;
+                Intensity.money += x1;
+                Intensity.Save_data();
+                return 0;
+
+            }
+            
         }
     }
 }
