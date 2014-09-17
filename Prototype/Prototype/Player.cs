@@ -490,6 +490,10 @@ namespace Prototype
             }
             return 0;
         }
+        public static void My_hit3(int attack)
+        {
+            HP_num -= attack;
+        }
         #endregion
     }
 }

@@ -50,6 +50,11 @@ namespace Prototype
             Texture2D Enemy_4_1;
             Texture2D Effect_4_1;
 
+            Texture2D Enemy_5_1;
+            Texture2D Effect_5_1;
+            Texture2D Skill_Enemy_5_1;
+            Texture2D Skill_Enemy_5_2;
+
 
             Texture2D Skill_backshot;
             Texture2D Skill_cooldown;
@@ -110,8 +115,14 @@ namespace Prototype
             Enemy_3_1 = Content.Load<Texture2D>(@"Image\\Enemy_3_1");
             Enemy_3_1_tan = Content.Load<Texture2D>(@"Image\\Enemy_3_1_tan");
             Skill_Enemy_3_1 = Content.Load<Texture2D>(@"Image\\Skill1_Enemy_3_1");
+
             Enemy_4_1 = Content.Load<Texture2D>(@"Image\\Enemy_4_1");
             Effect_4_1 = Content.Load<Texture2D>(@"Image\\Effect_4_1");
+
+            Enemy_5_1 = Content.Load<Texture2D>(@"Image\\Enemy_5_1");
+            Effect_5_1 = Content.Load<Texture2D>(@"Image\\Effect_5_1");
+            Skill_Enemy_5_1 = Content.Load<Texture2D>(@"Image\\Skill1_Enemy_5_1");
+            Skill_Enemy_5_2 = Content.Load<Texture2D>(@"Image\\Skill1_Enemy_5_2");
 
             Skill_backshot = Content.Load<Texture2D>(@"Image\\Skill_backshot");
             Skill_cooldown = Content.Load<Texture2D>(@"Image\\Skill_cooldown");
@@ -165,6 +176,9 @@ namespace Prototype
                     break;
                 case 4:
                     Enemy4.Update(gameTime);
+                    break;
+                case 5:
+                    Enemy5.Update(gameTime);
                     break;
                 case 99:
                     Start.Update(gameTime);
@@ -252,6 +266,20 @@ namespace Prototype
             if (CurrentStage <= 50)
             {
                 spriteBatch.Draw(HP_out, new Vector2(450, 20), new Rectangle(0, 0, 300, 30), Color.White);
+
+                int sip2 = -1, il2 = 0;
+                if (MyFunction.Mypercent >= 10)
+                {
+                    sip2 = MyFunction.Mypercent / 10;
+                    il2 = MyFunction.Mypercent - (sip2 * 10);
+                }
+                else
+                {
+                    il2 = MyFunction.Mypercent;
+                }
+                if (sip2 != -1) spriteBatch.Draw(number, new Vector2(400, 200), new Rectangle(sip2 * 20, 0, 20, 50), Color.White);
+                spriteBatch.Draw(number, new Vector2(400 + 20, 200), new Rectangle(il2 * 20, 0, 20, 50), Color.White);
+
                 int bak = -1, sip = -1, il = 0;
                 if (Intensity.money >= 100)
                 {
@@ -267,7 +295,7 @@ namespace Prototype
                 {
                     il = Intensity.money;
                 }
-                if (bak != -1) spriteBatch.Draw(number, new Vector2(180, 100), new Rectangle(sip * 20, 0, 20, 50), Color.White);
+                if (bak != -1) spriteBatch.Draw(number, new Vector2(180, 100), new Rectangle(bak * 20, 0, 20, 50), Color.White);
                 if(sip != -1) spriteBatch.Draw(number, new Vector2(200, 100), new Rectangle(sip * 20, 0, 20, 50), Color.White);
                 spriteBatch.Draw(number, new Vector2(200+20, 100), new Rectangle(il * 20, 0, 20, 50), Color.White);
 
@@ -335,8 +363,14 @@ namespace Prototype
                         if (Player.y == 26)
                         {
                             Player.Initialize(Content);
+                            /*
                             Enemy2.Initialize(Content);
-                            CurrentStage = 2;
+                            CurrentStage ++;
+                            */
+                            ///*
+                            Enemy5.Initialize(Content);
+                            CurrentStage =5;
+                            //*/ 
                         }
                     }
                     spriteBatch.Draw(portal, new Vector2(350, 460), new Rectangle(0, 0, 100, 100), Color.White);
@@ -403,6 +437,20 @@ namespace Prototype
                         }
                     }
                     spriteBatch.Draw(portal, new Vector2(350, 460), new Rectangle(0, 0, 100, 100), Color.White);
+
+                    if (Player.x >= 18 && Player.x <= 22)
+                    {
+                        if (Player.y == 2)
+                        {
+                            SoundManager.StopStage1_3();
+                            SoundManager.PlayStart();
+                            Player.Initialize(Content);
+                            Player_Tan.Initialize(Content);
+                            Enemy1.Initialize(Content);
+                            CurrentStage = 99;
+                        }
+                    }
+                    spriteBatch.Draw(portal, new Vector2(350, -20), new Rectangle(0, 0, 100, 100), Color.White);
                 }
             }
             else if (CurrentStage == 3)
@@ -432,8 +480,8 @@ namespace Prototype
                         if (Enemy3.Tan[k].on == 1)
                         {
                             spriteBatch.Draw(Enemy_3_1_tan, new Vector2((Enemy3.Tan[k].x * 20) + 8, (Enemy3.Tan[k].y * 20) - 12), new Rectangle(Enemy3.Tan[k].pattern1_tan_Graphic * 150, 0, 150, 100), Color.White);
-                            int check = Player.My_hit2(Player.x, Player.y, Enemy3.Tan[k].x, Enemy3.Tan[k].y,4,2,10, 2);
-                            if (check == 1) Enemy3.Tan[k].on = 0;
+                            int check = Player.My_hit2(Player.x, Player.y, Enemy3.Tan[k].x, Enemy3.Tan[k].y,4,2,1, 2);
+                            //if (check == 1) Enemy3.Tan[k].on = 0;
                         }
                     }
 
@@ -456,6 +504,20 @@ namespace Prototype
                         }
                     }
                     spriteBatch.Draw(portal, new Vector2(350, 460), new Rectangle(0, 0, 100, 100), Color.White);
+
+                    if (Player.x >= 18 && Player.x <= 22)
+                    {
+                        if (Player.y == 2)
+                        {
+                            SoundManager.StopStage1_3();
+                            SoundManager.PlayStart();
+                            Player.Initialize(Content);
+                            Player_Tan.Initialize(Content);
+                            Enemy1.Initialize(Content);
+                            CurrentStage = 99;
+                        }
+                    }
+                    spriteBatch.Draw(portal, new Vector2(350, -20), new Rectangle(0, 0, 100, 100), Color.White);
 
                 }
 
@@ -503,7 +565,7 @@ namespace Prototype
                                         if (Enemy4.Hit_Matrix1[h1, h2] == 1)
                                         {
                                             spriteBatch.Draw(Effect_4_1, new Vector2(Enemy4.x * 20 + ((h1 - 1) * 40) - 30, Enemy4.y * 20 + ((h2 - 1) * 40) - 30), new Rectangle((Enemy4.target_on - 1) * 80, 0, 80, 80), Color.White);
-                                            int check = Player.My_hit(Player.x, Player.y, Enemy4.x + ((h2 - 1) * 2), Enemy4.y + ((h1 - 1) * 2), 1, 0);
+                                            int check = Player.My_hit(Player.x, Player.y, Enemy4.x + ((h2 - 1) * 2), Enemy4.y + ((h1 - 1) * 2), 5, 0);
                                             if (check == 1) Player.y += 2;
                                         }
                                         break;
@@ -511,7 +573,7 @@ namespace Prototype
                                         if (Enemy4.Hit_Matrix2[h1, h2] == 1)
                                         {
                                             spriteBatch.Draw(Effect_4_1, new Vector2(Enemy4.x * 20 + ((h1 - 1) * 40) - 30, Enemy4.y * 20 + ((h2 - 1) * 40) - 30), new Rectangle((Enemy4.target_on - 1) * 80, 0, 80, 80), Color.White);
-                                            int check = Player.My_hit(Player.x, Player.y, Enemy4.x + ((h2 - 1) * 2), Enemy4.y + ((h1 - 1) * 2), 1, 0);
+                                            int check = Player.My_hit(Player.x, Player.y, Enemy4.x + ((h2 - 1) * 2), Enemy4.y + ((h1 - 1) * 2), 5, 0);
                                             if (check == 1) Player.x -= 2;
                                         }
                                         break;
@@ -519,7 +581,7 @@ namespace Prototype
                                         if (Enemy4.Hit_Matrix3[h1, h2] == 1)
                                         {
                                             spriteBatch.Draw(Effect_4_1, new Vector2(Enemy4.x * 20 + ((h1 - 1) * 40) - 30, Enemy4.y * 20 + ((h2 - 1) * 40) - 30), new Rectangle((Enemy4.target_on - 1) * 80, 0, 80, 80), Color.White);
-                                            int check = Player.My_hit(Player.x, Player.y, Enemy4.x + ((h2 - 1) * 2), Enemy4.y + ((h1 - 1) * 2), 1, 0);
+                                            int check = Player.My_hit(Player.x, Player.y, Enemy4.x + ((h2 - 1) * 2), Enemy4.y + ((h1 - 1) * 2), 5, 0);
                                             if (check == 1) Player.x += 2;
                                         }
                                         break;
@@ -527,7 +589,7 @@ namespace Prototype
                                         if (Enemy4.Hit_Matrix4[h1, h2] == 1)
                                         {
                                             spriteBatch.Draw(Effect_4_1, new Vector2(Enemy4.x * 20 + ((h1 - 1) * 40) - 30, Enemy4.y * 20 + ((h2 - 1) * 40) - 30), new Rectangle((Enemy4.target_on - 1) * 80, 0, 80, 80), Color.White);
-                                            int check = Player.My_hit(Player.x, Player.y, Enemy4.x + ((h2 - 1) * 2), Enemy4.y + ((h1 - 1) * 2), 1, 0);
+                                            int check = Player.My_hit(Player.x, Player.y, Enemy4.x + ((h2 - 1) * 2), Enemy4.y + ((h1 - 1) * 2), 5, 0);
                                             if (check == 1) Player.y -= 2;
                                         }
                                         break;
@@ -548,6 +610,7 @@ namespace Prototype
                         }
                         Enemy4.delay_Effect = 0;
                     }
+
                     spriteBatch.Draw(Skill_Enemy_3_1, new Vector2(700, 70), new Rectangle(0, 0, 50, 50), Color.White);
                     int Cool = 50 * Enemy4.pattern / Enemy4.pattern_max;
                     spriteBatch.Draw(Skill_cooldown, new Vector2(700, 70), new Rectangle(0, 0, 50, 50 - Cool), Color.White);
@@ -555,7 +618,160 @@ namespace Prototype
                 }
                 else
                 {
+                    if (Player.x >= 18 && Player.x <= 22)
+                    {
+                        if (Player.y == 26)
+                        {
+                            Player.Initialize(Content);
+                            Enemy5.Initialize(Content);
+                            CurrentStage++;
+                        }
+                    }
+                    spriteBatch.Draw(portal, new Vector2(350, 460), new Rectangle(0, 0, 100, 100), Color.White);
 
+                    if (Player.x >= 18 && Player.x <= 22)
+                    {
+                        if (Player.y == 2)
+                        {
+                            SoundManager.StopStage4_6();
+                            SoundManager.PlayStart();
+                            Player.Initialize(Content);
+                            Player_Tan.Initialize(Content);
+                            Enemy1.Initialize(Content);
+                            CurrentStage = 99;
+                        }
+                    }
+                    spriteBatch.Draw(portal, new Vector2(350, -20), new Rectangle(0, 0, 100, 100), Color.White);
+                }
+
+            }
+            else if (CurrentStage == 5)
+            {
+                if (Enemy5.life == 1)
+                {
+                    int EnemyHP = 292 * Enemy5.HP_num / Enemy5.HP_max;
+                    spriteBatch.Draw(HP_in, new Vector2(454 + 292 - EnemyHP, 24), new Rectangle(0, 0, EnemyHP, 22), Color.White);
+
+                    for (int k = 0; k <= 49; k++)
+                    {
+                        if (Player_Tan.c_Tan[k].on == 1)
+                        {
+                            int check = Enemy5.Enemy_hit(Player_Tan.c_Tan[k].x, Player_Tan.c_Tan[k].y, Enemy5.x, Enemy5.y, 3, Player_Tan.c_Tan[k].i_direction);
+                            if (check == 1) Player_Tan.c_Tan[k].on = 0;
+                        }
+                    }
+                    if (Enemy5.pattern2_on == 0)
+                    {
+                        if (Enemy5.c_moving <= 3)
+                        {
+                            spriteBatch.Draw(Enemy_5_1, new Vector2(Enemy5.x * 20, Enemy5.y * 20), new Rectangle(Enemy5.c_moving * 64, (Enemy5.i_direction - 1) * 64 , 64, 64), Color.White);
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(Enemy_5_1, new Vector2(Enemy5.x * 20, Enemy5.y * 20), new Rectangle((Enemy5.c_moving - 3) * 64, (Enemy5.i_direction - 1) * 64 , 64, 64), Color.White);
+                        }
+                    }
+                    else
+                    {
+
+                        if (Enemy5.c_moving <= 3)
+                        {
+                            spriteBatch.Draw(Enemy_5_1, new Vector2(Enemy5.x * 20, Enemy5.y * 20), new Rectangle(Enemy5.c_moving * 64, (Enemy5.i_direction - 1) * 64 + 256, 64, 64), Color.White);
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(Enemy_5_1, new Vector2(Enemy5.x * 20, Enemy5.y * 20), new Rectangle((Enemy5.c_moving - 3) * 64, (Enemy5.i_direction - 1) * 64 + 256, 64, 64), Color.White);
+                        }
+                    }
+
+                    if (Enemy5.pattern_on >= 1)
+                    {
+                        for (int h1 = 0; h1 <= 3; h1++)
+                        {
+                            for (int h2 = 0; h2 <=3; h2++)
+                            {
+                                if (Enemy5.Hit_Matrix1[h1, h2] == 1)
+                                {
+                                    if (Enemy5.pattern_on >= 20)
+                                    {
+                                        spriteBatch.Draw(Effect_5_1, new Vector2(Enemy5.pattern_x * 20 + ((h1 - 1) * 40) - 30, Enemy5.pattern_y * 20 + ((h2 - 1) * 40) - 30), new Rectangle((Enemy5.pattern_on - 21) * 100, 0, 100, 100), Color.White);
+                                    }
+                                    else if (Enemy5.pattern_on >= 20)
+                                    {
+                                        spriteBatch.Draw(Effect_5_1, new Vector2(Enemy5.pattern_x * 20 + ((h1 - 1) * 40) - 30, Enemy5.pattern_y * 20 + ((h2 - 1) * 40) - 30), new Rectangle((Enemy5.pattern_on - 11) * 100, 0, 100, 100), Color.White);
+                                    }
+                                    else
+                                    {
+                                        spriteBatch.Draw(Effect_5_1, new Vector2(Enemy5.pattern_x * 20 + ((h1 - 1) * 40) - 30, Enemy5.pattern_y * 20 + ((h2 - 1) * 40) - 30), new Rectangle((Enemy5.pattern_on - 1) * 100, 0, 100, 100), Color.White);
+                                    }
+                                        
+                                    int check = Player.My_hit(Player.x, Player.y, Enemy5.pattern_x + ((h2 - 1) * 2), Enemy5.pattern_y + ((h1 - 1) * 2), 3, 0);
+                                    //if (check == 1) Enemy2.Tan[k].on = 0;
+                                }
+                            }
+                        }
+                        if (Enemy5.pattern_on <= 30)
+                        {
+                            Enemy5.pattern_on++;
+                        }
+                        else
+                        {
+                            Enemy5.pattern_on = 0;
+                        }
+                    }
+                    if (Enemy5.pattern2_on >= 1)
+                    {
+                        Enemy5.pattern2_on++;
+                        if (Enemy5.pattern2_on >= 100)
+                        {
+                            Enemy5.pattern2_on = 0;
+                        }
+                    }
+
+                    if (Enemy5.pattern2_del >= 1)
+                    {
+                        Player.My_hit3(4);
+                        Enemy5.pattern2_del++;
+                        if (Enemy5.pattern2_del >= 5)
+                        {
+                            Enemy5.pattern2_del = 0;
+                        }
+                    }
+
+                    spriteBatch.Draw(Skill_Enemy_5_1, new Vector2(700, 70), new Rectangle(0, 0, 50, 50), Color.White);
+                    spriteBatch.Draw(Skill_Enemy_5_2, new Vector2(700, 140), new Rectangle(0, 0, 50, 50), Color.White);
+                    int Cool = 50 * Enemy5.pattern / Enemy5.pattern_max;
+                    spriteBatch.Draw(Skill_cooldown, new Vector2(700, 70), new Rectangle(0, 0, 50, 50 - Cool), Color.White);
+                    Cool = 50 * Enemy5.pattern2 / Enemy5.pattern2_max;
+                    spriteBatch.Draw(Skill_cooldown, new Vector2(700, 140), new Rectangle(0, 0, 50, 50 - Cool), Color.White);
+
+                }
+                else
+                {
+                    if (Player.x >= 18 && Player.x <= 22)
+                    {
+                        if (Player.y == 26)
+                        {
+                            Player.Initialize(Content);
+                            //Enemy5.Initialize(Content);
+                            CurrentStage++;
+                        }
+                    }
+                    spriteBatch.Draw(portal, new Vector2(350, 460), new Rectangle(0, 0, 100, 100), Color.White);
+
+                    if (Player.x >= 18 && Player.x <= 22)
+                    {
+                        if (Player.y == 2)
+                        {
+                            SoundManager.StopStage4_6();
+                            SoundManager.PlayStart();
+                            Player.Initialize(Content);
+                            Player_Tan.Initialize(Content);
+                            Enemy1.Initialize(Content);
+                            CurrentStage = 99;
+                        }
+                    }
+                    spriteBatch.Draw(portal, new Vector2(350, -20), new Rectangle(0, 0, 100, 100), Color.White);
                 }
             }
             spriteBatch.Draw(Mousepoint, new Vector2(Mouse.GetState().X, Mouse.GetState().Y), new Rectangle(0, 0, 50, 50), Color.White);

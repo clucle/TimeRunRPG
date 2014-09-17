@@ -28,9 +28,9 @@ namespace Prototype
         public static byte Hit_x;
         public static byte Hit_y;
         public static byte[,] Hit_Matrix = new byte[3,3]{
-        {1,1,0},
+        {0,1,0},
         {1,0,1},
-        {0,1,1}
+        {0,1,0}
         };
         #endregion
 

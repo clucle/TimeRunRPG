@@ -94,7 +94,7 @@ namespace Prototype
                         Skill_CoolDown.num++;
                         if (c_moving == 0)
                         {
-                            if (MyFunction.Cnct(x, y, Player.x, Player.y) == 1)
+                            if (MyFunction.Cnct_2(x, y, Player.x, Player.y) == 1)
                             {
                                 c_moving = 2;
                             }

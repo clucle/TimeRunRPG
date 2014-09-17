@@ -81,8 +81,8 @@ namespace Prototype
             patternline = 0;
             revision = 0;
 
-            HP_num = 120;
-            HP_max = 120;
+            HP_num = 150;
+            HP_max = 150;
 
             Skill_CoolDown.on = 0;
             Skill_CoolDown.max = 20;
@@ -110,6 +110,19 @@ namespace Prototype
                             if (MyFunction.Cnct(x, y, Player.x, Player.y) == 1)
                             {
                                 c_moving = 2;
+                                if (pattern >= pattern_max)
+                                {
+                                    patternline = MyFunction.LineCrush(Player.x, Player.y, x, y);
+                                    if (patternline > 0)
+                                    {
+                                        pattern = 0;
+                                        c_moving = 4;
+                                    }
+                                    else
+                                    {
+                                        c_moving = 0;
+                                    }
+                                }
                             }
                             else
                             {
@@ -223,7 +236,7 @@ namespace Prototype
                             SoundManager.PlayEnemyShot();
                             c_moving++;
                             target_on = 1;
-                            Player.HP_num -= 5;
+                            Player.HP_num -= 10;
                         }
                         else if (c_moving == 3)
                         {
