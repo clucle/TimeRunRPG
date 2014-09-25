@@ -27,7 +27,8 @@ namespace Prototype
         private static SoundEffect playerShot;
         private static SoundEffect enemyShot;
         private static SoundEffect enemy3Shot;
-
+        private static SoundEffect Enemy6_pattern1;
+        private static SoundEffect Enemy6_pattern1_2;
 
 
         private static Random rand = new Random();
@@ -53,7 +54,8 @@ namespace Prototype
                 enemyShot = content.Load<SoundEffect>(@"Sounds\\Shot2");
 
                 enemy3Shot = content.Load<SoundEffect>(@"Sounds\\Explosion1");
-
+                Enemy6_pattern1 = content.Load<SoundEffect>(@"Sounds\\Enemy6_pattern1");
+                Enemy6_pattern1_2 = content.Load<SoundEffect>(@"Sounds\\Enemy6_pattern1_2");
                 for (int x = 1; x <= explosionCount; x++)
                 {
                     explosions.Add(content.Load<SoundEffect>(@"sounds\Explosion" + x.ToString()));
@@ -69,7 +71,7 @@ namespace Prototype
         {
             try
             {
-                Start_Bgm_Instance.Play();
+                //Start_Bgm_Instance.Play();
             }
             catch
             {
@@ -91,7 +93,7 @@ namespace Prototype
         {
             try
             {
-                Stage1_3_Bgm_Instance.Play();
+                //Stage1_3_Bgm_Instance.Play();
             }
             catch
             {
@@ -113,7 +115,7 @@ namespace Prototype
         {
             try
             {
-                Stage4_6_Bgm_Instance.Play();
+                //Stage4_6_Bgm_Instance.Play();
             }
             catch
             {
@@ -135,7 +137,7 @@ namespace Prototype
         {
             try
             {
-                explosions[rand.Next(0, explosionCount)].Play();
+                //explosions[rand.Next(0, explosionCount)].Play();
             }
             catch
             {
@@ -146,7 +148,7 @@ namespace Prototype
         {
             try
             {
-                playerShot.Play();
+               // playerShot.Play();
             }
             catch
             {
@@ -157,7 +159,7 @@ namespace Prototype
         {
             try
             {
-                enemyShot.Play();
+                //enemyShot.Play();
             }
             catch
             {
@@ -168,11 +170,33 @@ namespace Prototype
         {
             try
             {
-                enemy3Shot.Play();
+                //enemy3Shot.Play();
             }
             catch
             {
                 Debug.Write("PlayEnemyShot Failed");
+            }
+        }
+        public static void PlayEnemy6_pattern1()
+        {
+            try
+            {
+                //Enemy6_pattern1.Play();
+            }
+            catch
+            {
+                Debug.Write("enemy6_pattern1 Failed");
+            }
+        }
+        public static void PlayEnemy6_pattern1_2()
+        {
+            try
+            {
+                //Enemy6_pattern1_2.Play();
+            }
+            catch
+            {
+                Debug.Write("enemy6_pattern1_2 Failed");
             }
         }
     }

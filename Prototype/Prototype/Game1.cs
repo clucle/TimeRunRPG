@@ -18,55 +18,61 @@ namespace Prototype
         #region Declarations
 
 
-            #region Texture
-            GraphicsDeviceManager graphics;
-            SpriteBatch spriteBatch;
+        #region Texture
+        GraphicsDeviceManager graphics;
+        SpriteBatch spriteBatch;
 
-            Texture2D Back_start;
-            Texture2D Back_intensity;
+        Texture2D Back_start;
+        Texture2D Back_intensity;
 
-            Texture2D Tile;
-            Texture2D tile1;
-            Texture2D Map1;
-            Texture2D character1;
-            Texture2D location; 
-            Texture2D tan;
-
-
-
-            Texture2D Enemy_tile;
-
-            Texture2D Enemy_1_1;
-            Texture2D Effect_1_1;
-
-            Texture2D Enemy_2_1;
-            Texture2D Enemy_2_1_tan;
-            Texture2D Skill_Enemy_2_1;
-
-            Texture2D Enemy_3_1;
-            Texture2D Enemy_3_1_tan;
-            Texture2D Skill_Enemy_3_1;
-
-            Texture2D Enemy_4_1;
-            Texture2D Effect_4_1;
-
-            Texture2D Enemy_5_1;
-            Texture2D Effect_5_1;
-            Texture2D Skill_Enemy_5_1;
-            Texture2D Skill_Enemy_5_2;
+        Texture2D Tile;
+        Texture2D tile1;
+        Texture2D Map1;
+        Texture2D character1;
+        Texture2D location; 
+        Texture2D tan;
 
 
-            Texture2D Skill_backshot;
-            Texture2D Skill_cooldown;
-            Texture2D Skill_moving;
 
-            Texture2D HP_in;
-            Texture2D HP_out;
+        Texture2D Enemy_tile;
 
-            Texture2D Mousepoint;
-            Texture2D number;
-            Texture2D portal;
-            #endregion
+        Texture2D Enemy_1_1;
+        Texture2D Effect_1_1;
+
+        Texture2D Enemy_2_1;
+        Texture2D Enemy_2_1_tan;
+        Texture2D Skill_Enemy_2_1;
+
+        Texture2D Enemy_3_1;
+        Texture2D Enemy_3_1_tan;
+        Texture2D Skill_Enemy_3_1;
+
+        Texture2D Enemy_4_1;
+        Texture2D Effect_4_1;
+
+        Texture2D Enemy_5_1;
+        Texture2D Effect_5_1;
+        Texture2D Skill_Enemy_5_1;
+        Texture2D Skill_Enemy_5_2;
+
+        Texture2D Enemy_6_1;
+        Texture2D Effect_6_1;
+        //Texture2D Skill_Enemy_5_1;
+        //Texture2D Skill_Enemy_5_2;
+
+        Texture2D Enemy_7_1;    
+
+        Texture2D Skill_backshot;
+        Texture2D Skill_cooldown;
+        Texture2D Skill_moving;
+
+        Texture2D HP_in;
+        Texture2D HP_out;
+
+        Texture2D Mousepoint;
+        Texture2D number;
+        Texture2D portal;
+        #endregion
 
         public static byte CurrentStage;
 
@@ -124,6 +130,9 @@ namespace Prototype
             Skill_Enemy_5_1 = Content.Load<Texture2D>(@"Image\\Skill1_Enemy_5_1");
             Skill_Enemy_5_2 = Content.Load<Texture2D>(@"Image\\Skill1_Enemy_5_2");
 
+            Enemy_6_1 = Content.Load<Texture2D>(@"Image\\Enemy_6_1");
+            Effect_6_1 = Content.Load<Texture2D>(@"Image\\Effect_6_1");
+
             Skill_backshot = Content.Load<Texture2D>(@"Image\\Skill_backshot");
             Skill_cooldown = Content.Load<Texture2D>(@"Image\\Skill_cooldown");
             Skill_moving = Content.Load<Texture2D>(@"Image\\Skill_moving");
@@ -179,6 +188,9 @@ namespace Prototype
                     break;
                 case 5:
                     Enemy5.Update(gameTime);
+                    break;
+                case 6:
+                    Enemy6.Update(gameTime);
                     break;
                 case 99:
                     Start.Update(gameTime);
@@ -311,7 +323,7 @@ namespace Prototype
             #region Enemy
             //1탄
 
-
+            #region Enemy1
             if (CurrentStage == 1)
             {
                 
@@ -368,8 +380,8 @@ namespace Prototype
                             CurrentStage ++;
                             */
                             ///*
-                            Enemy5.Initialize(Content);
-                            CurrentStage =5;
+                            Enemy6.Initialize(Content);
+                            CurrentStage =6;
                             //*/ 
                         }
                     }
@@ -391,6 +403,8 @@ namespace Prototype
 
                 }
             }
+#endregion
+            #region WOW
             else if (CurrentStage == 2)
             {
                 if (Enemy2.life == 1)
@@ -645,6 +659,7 @@ namespace Prototype
                 }
 
             }
+#endregion
             else if (CurrentStage == 5)
             {
                 if (Enemy5.life == 1)
@@ -696,7 +711,7 @@ namespace Prototype
                                     {
                                         spriteBatch.Draw(Effect_5_1, new Vector2(Enemy5.pattern_x * 20 + ((h1 - 1) * 40) - 30, Enemy5.pattern_y * 20 + ((h2 - 1) * 40) - 30), new Rectangle((Enemy5.pattern_on - 21) * 100, 0, 100, 100), Color.White);
                                     }
-                                    else if (Enemy5.pattern_on >= 20)
+                                    else if (Enemy5.pattern_on >= 10)
                                     {
                                         spriteBatch.Draw(Effect_5_1, new Vector2(Enemy5.pattern_x * 20 + ((h1 - 1) * 40) - 30, Enemy5.pattern_y * 20 + ((h2 - 1) * 40) - 30), new Rectangle((Enemy5.pattern_on - 11) * 100, 0, 100, 100), Color.White);
                                     }
@@ -745,6 +760,85 @@ namespace Prototype
                     Cool = 50 * Enemy5.pattern2 / Enemy5.pattern2_max;
                     spriteBatch.Draw(Skill_cooldown, new Vector2(700, 140), new Rectangle(0, 0, 50, 50 - Cool), Color.White);
 
+                }
+                else
+                {
+                    if (Player.x >= 18 && Player.x <= 22)
+                    {
+                        if (Player.y == 26)
+                        {
+                            Player.Initialize(Content);
+                            Enemy6.Initialize(Content);
+                            CurrentStage++;
+                        }
+                    }
+                    spriteBatch.Draw(portal, new Vector2(350, 460), new Rectangle(0, 0, 100, 100), Color.White);
+
+                    if (Player.x >= 18 && Player.x <= 22)
+                    {
+                        if (Player.y == 2)
+                        {
+                            SoundManager.StopStage4_6();
+                            SoundManager.PlayStart();
+                            Player.Initialize(Content);
+                            Player_Tan.Initialize(Content);
+                            Enemy1.Initialize(Content);
+                            CurrentStage = 99;
+                        }
+                    }
+                    spriteBatch.Draw(portal, new Vector2(350, -20), new Rectangle(0, 0, 100, 100), Color.White);
+                }
+            }
+            else if (CurrentStage == 6)
+            {
+                if (Enemy6.life == 1)
+                {
+                    int EnemyHP = 292 * Enemy6.HP_num / Enemy6.HP_max;
+                    spriteBatch.Draw(HP_in, new Vector2(454 + 292 - EnemyHP, 24), new Rectangle(0, 0, EnemyHP, 22), Color.White);
+
+                    for (int k = 0; k <= 49; k++)
+                    {
+                        if (Player_Tan.c_Tan[k].on == 1)
+                        {
+                            int check = Enemy6.Enemy_hit(Player_Tan.c_Tan[k].x, Player_Tan.c_Tan[k].y, Enemy6.x, Enemy6.y, 3, Player_Tan.c_Tan[k].i_direction);
+                            if (check == 1) Player_Tan.c_Tan[k].on = 0;
+                        }
+                    }
+
+
+                    
+
+                    if (Enemy6.c_moving >= 8)
+                    {
+
+                        for (int h1 = 0; h1 <= 5; h1++)
+                        {
+                            for (int h2 = 0; h2 <= 10; h2++)
+                            {
+                                if (Enemy6.Hit_Matrix1[h1, h2] == 1)
+                                {
+                                    int check = Player.My_hit(Player.x, Player.y, Enemy6.x + ((h2 - 5) * 2), Enemy6.y + ((h1 - 2) * 2), 3, 0);
+                                }
+                            }
+                        }
+
+
+                        spriteBatch.Draw(Enemy_6_1, new Vector2(Enemy6.x * 20, Enemy6.y * 20), new Rectangle((Enemy6.c_moving-8) * 64, (Enemy6.i_direction - 1) * 80, 64, 80), Color.White);
+                        int t;
+                        t = Enemy6.Enemy_pattern1(Enemy6.pattern_on);
+                        if (t <= 2)
+                        {
+                            spriteBatch.Draw(Effect_6_1, new Vector2((Enemy6.x -12) * 20, (Enemy6.y - 3) * 20), new Rectangle(0, t * 208, 587, 208), Color.White);
+                        }
+                        else
+                        {
+                            Enemy6.pattern_on = 1;
+                        }
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(Enemy_6_1, new Vector2(Enemy6.x * 20, Enemy6.y * 20), new Rectangle((Enemy6.c_moving) * 64, (Enemy6.i_direction - 1) * 80, 64, 80), Color.White);
+                    }
                 }
                 else
                 {
