@@ -33,11 +33,11 @@ namespace Prototype
             Player.Max_moving = Accept_leg;
             Player.s_Max_moving = Accept_leg;
             Player.HP_max = 100 + Accept_body * Accept_body * Accept_body * 5;
-            for (int k = 0; k <= 1; k++)
+            for (int k = 0; k <= 2; k++)
             {
                 Cooldown.Skill_CoolDown[k].on = 1;
                 Cooldown.Skill_CoolDown[k].num = 0;
-                Cooldown.Skill_CoolDown[k].max = Accept_head * 3;
+                Cooldown.Skill_CoolDown[k].max = Accept_head * 6;
             }
             Player.Max_gun = 1;
         }

@@ -66,8 +66,13 @@ namespace Prototype
         Texture2D Skill_cooldown;
         Texture2D Skill_moving;
 
+        Texture2D Skill_element;
+        Texture2D Use_element;
+
         Texture2D HP_in;
         Texture2D HP_out;
+
+        
 
         Texture2D Mousepoint;
         Texture2D number;
@@ -141,6 +146,9 @@ namespace Prototype
             Skill_backshot = Content.Load<Texture2D>(@"Image\\Skill_backshot");
             Skill_cooldown = Content.Load<Texture2D>(@"Image\\Skill_cooldown");
             Skill_moving = Content.Load<Texture2D>(@"Image\\Skill_moving");
+
+            Skill_element = Content.Load<Texture2D>(@"Image\\Skill_element");
+            Use_element = Content.Load<Texture2D>(@"Image\\Use_element");
 
             HP_in = Content.Load<Texture2D>(@"Image\\HP_in");
             HP_out = Content.Load<Texture2D>(@"Image\\HP_out");
@@ -849,19 +857,35 @@ namespace Prototype
 
                 spriteBatch.Draw(location, new Vector2((Player.x * 20) + 1, (Player.y * 20) + 10), new Rectangle(0, 0, 38, 20), Color.White);
 
-                spriteBatch.Draw(character1, new Vector2((Player.x * 20) + 4, (Player.y * 20) - 22), new Rectangle(Player.c_moving * 32, (Player.i_direction - 1) * 48 + (Player.i_mode * 48 * 4), 32, 48), Color.White);
+                //spriteBatch.Draw(character1, new Vector2((Player.x * 20) + 4, (Player.y * 20) - 22), new Rectangle(Player.c_moving * 32, (Player.i_direction - 1) * 48 + (Player.i_mode * 48 * 4), 32, 48), Color.White);
+
+
+                if (Player.i_mode == 4 || Player.i_mode == 5)
+                {
+
+                    //spriteBatch.Draw(Use_element, new Vector2((Player.x * 20) - 30, (Player.y * 20) - 32), new Rectangle((Player.animation_Element-1)*96, (Player.element-1)*96, 96, 96), Color.White);
+
+                    spriteBatch.Draw(character1, new Vector2((Player.x * 20) + 4, (Player.y * 20) - 22), new Rectangle(0, (Player.i_direction - 1) * 48, 32, 48), Color.White);
+                    spriteBatch.Draw(Use_element, new Vector2((Player.x * 20) - 25, (Player.y * 20) - 40), new Rectangle((Player.animation_Element - 1) * 96, (Player.element - 1) * 96, 96, 96), Color.White);
+                }
+                else
+                {
+                    spriteBatch.Draw(character1, new Vector2((Player.x * 20) + 4, (Player.y * 20) - 22), new Rectangle(Player.c_moving * 32, (Player.i_direction - 1) * 48 + (Player.i_mode * 48 * 4), 32, 48), Color.White);
+                }
 
                 //스킬과 쿨다운
-                spriteBatch.Draw(Skill_moving, new Vector2(50, 70), new Rectangle(0, 0, 50, 50), Color.White);
-                spriteBatch.Draw(Skill_backshot, new Vector2(50, 140), new Rectangle(0, 0, 50, 50), Color.White);
-                for (int k = 0; k <= 1; k++)
+                spriteBatch.Draw(Skill_moving, new Vector2(50, 90), new Rectangle(0, 0, 50, 50), Color.White);
+                spriteBatch.Draw(Skill_backshot, new Vector2(50, 160), new Rectangle(0, 0, 50, 50), Color.White);
+                spriteBatch.Draw(Skill_element, new Vector2(50, 230), new Rectangle(0, 0, 50, 50), Color.White);
+                for (int k = 0; k <= 2; k++)
                 {
                     if (Cooldown.Skill_CoolDown[k].on == 0)
                     {
                         int Cool = 50 * Cooldown.Skill_CoolDown[k].num / Cooldown.Skill_CoolDown[k].max;
-                        spriteBatch.Draw(Skill_cooldown, new Vector2(50, 70 + (70 * k)), new Rectangle(0, 0, 50, 50 - Cool), Color.White);
+                        spriteBatch.Draw(Skill_cooldown, new Vector2(50, 90 + (70 * k)), new Rectangle(0, 0, 50, 50 - Cool), Color.White);
                     }
                 }
+
 
                 int sip3 = 0, il3 = 0;
                 sip3 = Time.sec / 10;
@@ -871,6 +895,8 @@ namespace Prototype
                 spriteBatch.Draw(number, new Vector2(395, 20), new Rectangle(sip3 * 30, 0, 30, 50), Color.White);
                 spriteBatch.Draw(number, new Vector2(395 + 20, 20), new Rectangle(il3 * 30, 0, 30, 50), Color.White);
 
+                il3 = Player.animation_Element;
+                spriteBatch.Draw(number, new Vector2(395 + 20, 40), new Rectangle(il3 * 30, 0, 30, 50), Color.White);
 
                 int bak = -1, sip = -1, il = 0;
                 if (Intensity.money >= 100)

@@ -33,7 +33,9 @@ namespace Prototype
         public static int HP_num;
         public static int HP_max;
 
-
+        public static byte animation_Element;//정령애니메이션
+        public static byte element;
+        public static byte element_check;
         //skill
         public static byte skill_moving;
         public static byte skill_moving_direction;
@@ -62,7 +64,7 @@ namespace Prototype
 
             s_moving = 0;
             //s_Max_moving = Max_moving;
-
+            element = 0;
 
             skill_moving = 0;
             skill_moving_num = 0;
@@ -157,6 +159,7 @@ namespace Prototype
                                 Player_Tan.c_Tan[tan_checking].y = y;
                                 Player_Tan.c_Tan[tan_checking].i_direction = i_direction;
                                 Player_Tan.c_Tan[tan_checking].distance = 0;
+                                element_check--;
                                 tan_checking++;
                                 if (tan_checking >= 50)
                                 {
@@ -189,7 +192,19 @@ namespace Prototype
                             }
                         }
 
-
+                        if (Keyboard.GetState().IsKeyDown(Keys.E) && animation_Element == 0)//속성부여
+                        {
+                            if (Cooldown.Skill_CoolDown[2].on == 1)
+                            {
+                                c_moving = 0;
+                                d_moving = 0;
+                                d_gun = 0;
+                                skill_moving_num = 0;
+                                i_mode = 4;
+                                animation_Element = 0;
+                            }
+                        }
+                        
 
                     }
                     else if (c_moving == 1)
@@ -282,6 +297,7 @@ namespace Prototype
                                 Player_Tan.c_Tan[tan_checking].y = y;
                                 Player_Tan.c_Tan[tan_checking].i_direction = i_direction;
                                 Player_Tan.c_Tan[tan_checking].distance = 0;
+                                element_check--;
                                 tan_checking++;
                                 if (tan_checking >= 50)
                                 {
@@ -296,6 +312,7 @@ namespace Prototype
                                 Player_Tan.c_Tan[tan_checking].y = y;
                                 Player_Tan.c_Tan[tan_checking].i_direction = i_direction;
                                 Player_Tan.c_Tan[tan_checking].distance = 0;
+                                element_check--;
                                 tan_checking++;
                                 if (tan_checking >= 50)
                                 {
@@ -356,6 +373,7 @@ namespace Prototype
                             Player_Tan.c_Tan[tan_checking].y = y;
                             Player_Tan.c_Tan[tan_checking].i_direction = i_direction;
                             Player_Tan.c_Tan[tan_checking].distance = 0;
+                            element_check--;
                             tan_checking++;
                             if (tan_checking >= 50)
                             {
@@ -415,7 +433,50 @@ namespace Prototype
                             Cooldown.Skill_CoolDown[0].on = 0;
                         }
                     }
-                }//imode
+                }
+                    
+                else if (i_mode == 4)
+                {
+                    if (Keyboard.GetState().IsKeyDown(Keys.Up))//키코드
+                    {
+                        i_mode = 5;
+                        element = 1;//얼음
+                        element_check = 5;
+                        c_moving = 0;
+                    }
+                    else if (Keyboard.GetState().IsKeyDown(Keys.Down))
+                    {
+                        i_mode = 5;
+                        element = 2;//화염
+                        element_check = 5;
+                        c_moving = 0;
+                    }
+                    animation_Element = 1;
+                }
+                else if (i_mode == 5)
+                {
+                    if (animation_Element <= 10)
+                    {
+                        animation_Element++;
+                    }
+                    else
+                    {
+                        i_mode = 0;
+                        c_moving = 0;
+                        d_moving = 0;
+                        d_gun = 0;
+                        skill_moving_num = 0;
+                    }
+
+                }
+
+                if (Cooldown.Skill_CoolDown[2].on == 1 && element_check <= 0 && animation_Element >= 10)
+                {
+                    Cooldown.Skill_CoolDown[2].on = 0;
+                    animation_Element = 0;
+                    element_check = 0;
+                }
+                //imode
             }
 
 

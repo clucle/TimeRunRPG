@@ -20,6 +20,8 @@ namespace Prototype
             public byte distance;
             public byte Max_distance;
             public byte i_direction;
+
+            public byte element;
         }
         public static Info_tan[] c_Tan = new Info_tan[50];
         #endregion
@@ -33,6 +35,7 @@ namespace Prototype
                 c_Tan[k].Max_distance = 8;
                 c_Tan[k].distance = 0;
                 c_Tan[k].on = 0;
+                c_Tan[k].element = 0;
             }
         }
         #endregion

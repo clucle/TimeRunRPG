@@ -28,11 +28,11 @@ namespace Prototype
 
             Time_Second = 0;
 
-            for (int k = 0; k <= 1; k++)
+            for (int k = 0; k <= 2; k++)
             {
                 Skill_CoolDown[k].on = 1;
                 Skill_CoolDown[k].num = 0;
-                Skill_CoolDown[k].max = 1;
+                //Skill_CoolDown[k].max = 1;
             }
 
         }
@@ -45,7 +45,7 @@ namespace Prototype
 
             if (Time_Second >= 10)
             {
-                for (int k = 0; k <= 1; k++)
+                for (int k = 0; k <= 2; k++)
                 {
                     if (Skill_CoolDown[k].on == 0)
                     {
