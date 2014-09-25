@@ -281,15 +281,19 @@ namespace Prototype
                     switch (direction)
                     {
                         case 1:
+                            if(y < 26)
                             y += 2;
                             break;
                         case 2:
+                            if (x > 2)
                             x -= 2;
                             break;
                         case 3:
+                            if (x < 36)
                             x += 2;
                             break;
                         case 4:
+                            if (y > 2)
                             y -= 2;
                             break;
                     }
@@ -309,15 +313,19 @@ namespace Prototype
                     switch (direction)
                     {
                         case 1:
+                            if (y < 26)
                             y += 2;
                             break;
                         case 2:
+                            if (x > 2)
                             x -= 2;
                             break;
                         case 3:
+                            if (x < 36)
                             x += 2;
                             break;
                         case 4:
+                            if (y > 2)
                             y -= 2;
                             break;
                     }

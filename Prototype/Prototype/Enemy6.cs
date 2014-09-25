@@ -43,8 +43,8 @@ namespace Prototype
         #region Initialization
         public static void Initialize(ContentManager Content)
         {
-            HP_num = 120;
-            HP_max = 120;
+            HP_num = 300;
+            HP_max = 300;
 
             pattern = 0;
             pattern_max = 10;

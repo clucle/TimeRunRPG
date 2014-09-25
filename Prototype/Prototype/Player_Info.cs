@@ -27,12 +27,12 @@ namespace Prototype
         public static void Accept_Info()
         {
             Accept_head = 9 - Intensity.head;
-            Accept_body = 9 - Intensity.body;
+            Accept_body = Intensity.body + 3;
             Accept_leg = 9 - Intensity.leg;
 
             Player.Max_moving = Accept_leg;
             Player.s_Max_moving = Accept_leg;
-
+            Player.HP_max = 100 + Accept_body * Accept_body * Accept_body * 5;
             for (int k = 0; k <= 1; k++)
             {
                 Cooldown.Skill_CoolDown[k].on = 1;

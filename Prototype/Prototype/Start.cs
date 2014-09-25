@@ -35,9 +35,12 @@ namespace Prototype
             {
                 SoundManager.StopStart();
                 SoundManager.PlayStage1_3();
-
+                Intensity.Initialize_load[5] = 0;
+                Intensity.money = 0;
+                int i = MyFunction.GetMoney(0);
                 Game1.CurrentStage = 1;
                 Player_Info.Accept_Info();
+                Player.HP_num = Player.HP_max;
             }
             if (Mouse.GetState().LeftButton == ButtonState.Released && mousedown > 0 && mouserect.Intersects(rect2))//상점
             {

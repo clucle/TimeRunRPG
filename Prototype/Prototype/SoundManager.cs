@@ -71,7 +71,7 @@ namespace Prototype
         {
             try
             {
-                //Start_Bgm_Instance.Play();
+                Start_Bgm_Instance.Play();
             }
             catch
             {
@@ -93,7 +93,7 @@ namespace Prototype
         {
             try
             {
-                //Stage1_3_Bgm_Instance.Play();
+                Stage1_3_Bgm_Instance.Play();
             }
             catch
             {
@@ -115,7 +115,7 @@ namespace Prototype
         {
             try
             {
-                //Stage4_6_Bgm_Instance.Play();
+                Stage4_6_Bgm_Instance.Play();
             }
             catch
             {
@@ -137,7 +137,7 @@ namespace Prototype
         {
             try
             {
-                //explosions[rand.Next(0, explosionCount)].Play();
+                explosions[rand.Next(0, explosionCount)].Play();
             }
             catch
             {
@@ -148,7 +148,7 @@ namespace Prototype
         {
             try
             {
-               // playerShot.Play();
+                playerShot.Play();
             }
             catch
             {
@@ -159,7 +159,7 @@ namespace Prototype
         {
             try
             {
-                //enemyShot.Play();
+                enemyShot.Play();
             }
             catch
             {
@@ -170,7 +170,7 @@ namespace Prototype
         {
             try
             {
-                //enemy3Shot.Play();
+                enemy3Shot.Play();
             }
             catch
             {
@@ -181,7 +181,7 @@ namespace Prototype
         {
             try
             {
-                //Enemy6_pattern1.Play();
+                Enemy6_pattern1.Play();
             }
             catch
             {
@@ -192,7 +192,7 @@ namespace Prototype
         {
             try
             {
-                //Enemy6_pattern1_2.Play();
+                Enemy6_pattern1_2.Play();
             }
             catch
             {
